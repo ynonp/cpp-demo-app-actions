@@ -24,6 +24,6 @@ jobs:
     - name: Create Release
       uses: ncipollo/release-action@v1.6.1
       with:
-        release_name: MyApp Linux
+        name: MyApp Linux
         artifacts: "dist/a.out"        
         token: ${{ secrets.GITHUB_TOKEN }}
