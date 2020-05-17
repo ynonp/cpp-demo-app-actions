@@ -20,5 +20,6 @@ jobs:
     - name: Create Release
       uses: ncipollo/release-action@v1.6.1
       with:
+        release_name: MyApp Mac
         artifacts: "dist/a.out"        
         token: ${{ secrets.GITHUB_TOKEN }}
