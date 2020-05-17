@@ -12,8 +12,8 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: myapp-linux
-            asset_name: dist/myapp
+            artifact_name: dist/myapp
+            asset_name: myapp-linux
           - os: windows-latest
             artifact_name: dist/myapp.exe
             asset_name: myapp-windows
@@ -40,7 +40,7 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: dist/*
-        asset_name: mything
+        file: ${{matrix.artifact_name}}
+        asset_name: ${{matrix.asset_name}}
         tag: ${{ github.ref }}
         overwrite: true
