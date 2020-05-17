@@ -5,11 +5,21 @@ on:
     tags:
     - '*'
 
-
 jobs:
   build:
-
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: myapp-linux
+            asset_name: dist/myapp
+          - os: windows-latest
+            artifact_name: dist/myapp.exe
+            asset_name: myapp-windows
+          - os: macos-latest
+            artifact_name: dist/myapp
+            asset_name: myapp-mac
 
     steps:
     - uses: actions/checkout@v2
@@ -24,6 +34,13 @@ jobs:
     - name: Create Release
       uses: ncipollo/release-action@v1.6.1
       with:
-        name: MyApp Mac
-        artifacts: "dist/a.out"        
         token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v1-release
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: dist/*
+        asset_name: mything
+        tag: ${{ github.ref }}
+        overwrite: true

@@ -1,7 +1,7 @@
 CPP=g++
 
 dist/a.out: main.o dist
-	$(CPP) main.o -o dist/a.out
+	$(CPP) main.o -o dist/myapp
 
 dist:
 	mkdir -p dist
