@@ -33,6 +33,7 @@ jobs:
       run: make
     - name: Create Release
       uses: ncipollo/release-action@v1.6.1
+      continue-on-error: true
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
 
